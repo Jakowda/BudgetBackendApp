@@ -1,16 +1,69 @@
-package pl.jakowicki.budgetapp.budget;
+package pl.jakowicki.budgetapp.users;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "application_user")
 public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<UserRole> roles = new HashSet<>();
+    public UserProfile() {}
+    public UserProfile(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public UserProfile(String email) {
+        this.email = email;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
@@ -18,5 +71,20 @@ public class UserProfile {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

@@ -1,10 +1,9 @@
-package pl.jakowicki.budgetapp.users;
+package pl.jakowicki.budgetapp.users.dto;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserProfileDto {
-
     private Long id;
     private String userName;
 

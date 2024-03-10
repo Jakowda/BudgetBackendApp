@@ -1,4 +1,4 @@
-package pl.jakowicki.budgetapp.expense;
+package pl.jakowicki.budgetapp.expense.dto;
 
 import org.springframework.stereotype.Component;
 import pl.jakowicki.budgetapp.category.Category;
