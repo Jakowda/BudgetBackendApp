@@ -14,7 +14,7 @@ import java.util.List;
 public class BudgetMapper {
 
 
-    static public Budget map(BudgetDto budgetDto){
+    static public Budget mapDtoToBudget(BudgetDto budgetDto){
         return new Budget(
                 budgetDto.name(),
                 budgetDto.amount(),
@@ -33,11 +33,11 @@ public class BudgetMapper {
                 budget.getStartDate(),
                 budget.getEndDate(),
                 budget.getState(),
-                UserProfileMapper.map(budget.getUser()),
+                UserProfileMapper.mapToUserProfileDto(budget.getUser()),
                 budget.getCategory());
     }
 
-    public static List<BudgetDto> map(List<Budget> budgetsList){
+    public static List<BudgetDto> mapListToBudgetDto(List<Budget> budgetsList){
         List<BudgetDto> mappedList = new ArrayList<>();
         budgetsList.forEach(
                 budget -> mappedList.add(
@@ -47,12 +47,12 @@ public class BudgetMapper {
                         budget.getAmount(),
                         budget.getStartDate(),
                         budget.getEndDate(),
-                        budget.getState(),UserProfileMapper.map(budget.getUser()),
+                        budget.getState(), UserProfileMapper.mapToUserProfileDto(budget.getUser()),
                                 budget.getCategory())));
         return mappedList;
     }
 
-    public static Budget map(NewBudgetDto newBudgetDto, UserProfile userProfile, Category category) {
+    public static Budget mapNewBudgetDtoToBudget(NewBudgetDto newBudgetDto, UserProfile userProfile, Category category) {
         return new Budget(
                 newBudgetDto.budgetName(),
                 newBudgetDto.amount(),
@@ -61,5 +61,18 @@ public class BudgetMapper {
                 BudgetState.OPEN,
                 userProfile,
                 category);
+    }
+
+    public static BudgetDto mapToBudgetDto(Budget budget) {
+        return new BudgetDto(
+                budget.getId(),
+                budget.getName(),
+                budget.getAmount(),
+                budget.getStartDate(),
+                budget.getEndDate(),
+                budget.getState(),
+                UserProfileMapper.mapToUserProfileDto(budget.getUser()),
+                budget.getCategory()
+                );
     }
 }

@@ -18,9 +18,7 @@ public class PlannedExpenseController {
 
     @GetMapping()
     List<PlannedExpenseDto> showPlannedExpenseList(){
-        List<PlannedExpenseDto> plannedExpenseDtos = plannedExpenseService.showPlannedExpenseList();
-        System.out.println(plannedExpenseDtos);
-        return plannedExpenseDtos;
+        return plannedExpenseService.showPlannedExpenseList();
     }
 
     @PostMapping()

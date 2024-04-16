@@ -1,5 +1,6 @@
 package pl.jakowicki.budgetapp.users;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.jakowicki.budgetapp.users.dto.UserProfileDto;
 
@@ -17,8 +18,10 @@ class UserProfileController {
     }
 
     @GetMapping("/{username}")
-    Optional<UserProfileDto> getUserDetails(@PathVariable String username){
-        return userProfileService.findUserDtoByUserName(username);
+    ResponseEntity<UserProfileDto> getUserDetails(@PathVariable String username){
+        return userProfileService.findUserByUserName(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.noContent().build());
     }
 
     @GetMapping

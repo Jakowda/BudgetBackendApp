@@ -5,6 +5,7 @@ import pl.jakowicki.budgetapp.expense.dto.ExpenseDto;
 import pl.jakowicki.budgetapp.expense.dto.NewExpeenseDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/expense")
@@ -20,6 +21,10 @@ public class ExpenseController {
         return expenseService.showExpenseList();
     }
 
+    @GetMapping("{id}")
+    Optional<ExpenseDto> getExpenseById(@PathVariable Long id){
+        return expenseService.findExpenseById(id);
+    }
     @PostMapping()
     void addNewExpense(@RequestBody NewExpeenseDto newExpenseDto){
         expenseService.addNewExpense(newExpenseDto);

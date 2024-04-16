@@ -19,7 +19,6 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long id;
-
     @Getter
     @Setter
     private String name;

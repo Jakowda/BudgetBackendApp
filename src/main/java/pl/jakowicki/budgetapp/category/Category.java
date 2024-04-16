@@ -21,4 +21,7 @@ public class Category {
     @Setter
     private String name;
 
+    public Category(String name) {
+        this.name = name;
+    }
 }

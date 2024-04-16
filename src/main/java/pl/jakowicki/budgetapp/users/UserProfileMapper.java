@@ -2,6 +2,7 @@ package pl.jakowicki.budgetapp.users;
 
 import org.springframework.stereotype.Component;
 import pl.jakowicki.budgetapp.users.dto.UserCredentialsDto;
+import pl.jakowicki.budgetapp.users.dto.UserDataDto;
 import pl.jakowicki.budgetapp.users.dto.UserProfileDto;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class UserProfileMapper {
         return new UserProfile(userProfileDto.getUserName());
     }
 
-    public static UserProfileDto map(UserProfile userProfile){
+    public static UserProfileDto mapToUserProfileDto(UserProfile userProfile){
         return new UserProfileDto(userProfile.getId(), userProfile.getEmail());
     }
 
@@ -37,5 +38,14 @@ public class UserProfileMapper {
                 userProfile.getEmail(),
                 userProfile.getPassword(),
                 roles);
+    }
+
+    public static UserDataDto mapUserToDataDto(UserProfile userProfile){
+        return new UserDataDto(
+                userProfile.getId(),
+                userProfile.getFirstName(),
+                userProfile.getLastName(),
+                userProfile.getEmail()
+        );
     }
 }

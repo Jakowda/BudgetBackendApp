@@ -1,6 +1,8 @@
 package pl.jakowicki.budgetapp.category;
 
 import org.springframework.stereotype.Service;
+import pl.jakowicki.budgetapp.category.dto.CategoryDto;
+import pl.jakowicki.budgetapp.category.dto.NewCategoryDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +16,11 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Optional<List<CategoryDto>> findAllCategories() {
-        return Optional.of(CategoryMapper.map((List<Category>) categoryRepository.findAll()));
+    public List<CategoryDto> findAllCategories() {
+        return CategoryMapper.map(categoryRepository.findAll());
     }
 
-    public void saveNewCategory(CategoryDto category) {
+    public void saveNewCategory(NewCategoryDto category) {
         categoryRepository.save(CategoryMapper.map(category));
     }
 
