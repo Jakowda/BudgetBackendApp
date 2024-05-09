@@ -65,3 +65,12 @@ CREATE TABLE planned_expense
     FOREIGN KEY (budget_id) REFERENCES budget(id),
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
+
+CREATE TABLE income
+(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    amount DOUBLE NOT NULL,
+    income_date DATE,
+    user_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES application_user(id)
+);

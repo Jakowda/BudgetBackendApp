@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class UserProfileMapper {
 
     public static UserProfile map(UserProfileDto userProfileDto){
-        return new UserProfile(userProfileDto.getUserName());
+        return new UserProfile(userProfileDto.userName());
     }
 
     public static UserProfileDto mapToUserProfileDto(UserProfile userProfile){

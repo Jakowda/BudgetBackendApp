@@ -14,12 +14,17 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class BudgetService {
 
     private BudgetRepository budgetRepository;
     private UserProfileService userProfileService;
     private CategoryService categoryService;
+
+    public BudgetService(BudgetRepository budgetRepository, UserProfileService userProfileService, CategoryService categoryService) {
+        this.budgetRepository = budgetRepository;
+        this.userProfileService = userProfileService;
+        this.categoryService = categoryService;
+    }
 
     Optional<BudgetDto> getBudgetById(Long id) {
         return Optional.of(
@@ -79,5 +84,9 @@ public class BudgetService {
 
     public void deleteBudgetById(Long budgetId) {
         budgetRepository.deleteById(budgetId);
+    }
+
+    public List<BudgetDto> showUsersListOfBudgets(Long userId) {
+        return BudgetMapper.mapListToBudgetDto(budgetRepository.findByUserId(userId));
     }
 }

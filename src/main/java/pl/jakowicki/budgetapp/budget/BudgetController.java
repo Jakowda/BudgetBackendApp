@@ -1,5 +1,6 @@
 package pl.jakowicki.budgetapp.budget;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,26 +20,38 @@ public class BudgetController {
     private final BudgetService budgetService;
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find a budget by ID")
     Optional<BudgetDto> getBudget(@PathVariable Long id){
         return budgetService.getBudgetById(id);
     }
     @GetMapping()
+    @Operation(summary = "Get all budgets")
     List<BudgetDto> showBudgetsList(){
         return budgetService.showListOfBudgets();
     }
+
+    @GetMapping("/user/{id}")
+    @Operation(summary = "Find all budgets by user id")
+    List<BudgetDto> showListOfUsersBudgets(@PathVariable Long id){
+        return budgetService.showUsersListOfBudgets(id);
+    }
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create new budget")
     void addNewBudget(@RequestBody NewBudgetDto newBudgetDto){
         budgetService.saveNewBudgetObject(newBudgetDto);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Update budget")
     void updateBudget(@PathVariable Long id, @RequestBody UpdatedBudget updatedBudget){
         budgetService.findAndUpdateBudget(id, updatedBudget);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete budget")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteBudget(@PathVariable Long id){
         budgetService.deleteBudgetById(id);

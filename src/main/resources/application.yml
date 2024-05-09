@@ -9,6 +9,3 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
-#  mvc:
-#    pathmatch:
-#      matching-strategy: ANT_PATH_MATCHER

@@ -42,3 +42,7 @@ VALUES ('Zakupy na cały tydzień w Lidlu', 254.97, '2023-09-11', 1,2),
        ('Opłata za wynajem', 750, '2023-08-31', 4, 3),
        ('Tankowanie auta', 316.54, '2023-09-09', 4,2);
 
+INSERT INTO income (amount, income_date, user_id)
+VALUES ( 254.97, '2023-09-11',2),
+       (750, '2023-08-31', 3),
+       (316.54, '2023-09-09',2);

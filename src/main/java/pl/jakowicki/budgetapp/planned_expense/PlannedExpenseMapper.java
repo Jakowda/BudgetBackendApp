@@ -36,4 +36,14 @@ public class PlannedExpenseMapper {
                 budget,
                 category);
     }
+
+    public static PlannedExpenseDto mapPlannedExpenseDto(PlannedExpense plannedExpense) {
+        return new PlannedExpenseDto(
+                plannedExpense.getName(),
+                plannedExpense.getAmount(),
+                plannedExpense.getPlannedExpenseState(),
+                plannedExpense.getBudget(),
+                plannedExpense.getCategory()
+        );
+    }
 }

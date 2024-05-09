@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.jakowicki.budgetapp.category.CategoryService;
 import pl.jakowicki.budgetapp.expense.dto.ExpenseDto;
 import pl.jakowicki.budgetapp.expense.dto.NewExpeenseDto;
-import pl.jakowicki.budgetapp.users.UserProfile;
+import pl.jakowicki.budgetapp.expense.dto.UpdatedExpenseDto;
 import pl.jakowicki.budgetapp.users.UserProfileService;
 
 import java.util.List;
@@ -48,5 +48,23 @@ public class ExpenseService {
     public Optional<ExpenseDto> findExpenseById(Long expenseId) {
         var expense = expenseRepository.findById(expenseId).orElseThrow();
         return Optional.of(ExpenseMapper.mapExpenseToDto(expense));
+    }
+
+    public void updateExpense(Long id, UpdatedExpenseDto updatedExpense) {
+        var existingExpense = expenseRepository.findById(id).orElseThrow();
+        existingExpense = updateExistingExpense(existingExpense, updatedExpense);
+        expenseRepository.save(existingExpense);
+    }
+
+    private Expense updateExistingExpense(Expense existingExpense, UpdatedExpenseDto updatedExpense) {
+        existingExpense.setName(updatedExpense.name());
+        existingExpense.setAmount(updatedExpense.amount());
+        existingExpense.setExpense_date(updatedExpense.expense_date());
+        existingExpense.setCategory(categoryService.findCategoryByName(updatedExpense.categoryName()).orElseThrow());
+        return existingExpense;
+    }
+
+    public void deleteExpenseById(Long id) {
+        expenseRepository.deleteById(id);
     }
 }
